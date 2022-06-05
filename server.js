@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const { zodiac } = require("./zodiac");
+const { football } = require("./football");
 const PORT = process.env.PORT || 8000;
 
 app.use(cors());
@@ -11,15 +12,15 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api", (req, res) => {
-  res.json(zodiac);
+  res.json(football);
 });
 
-app.get("/api/:month", (req, res) => {
-  const month = req.params.month.toLowerCase();
-  if (zodiac[month]) {
-    res.json(zodiac[month]);
+app.get("/api/:team", (req, res) => {
+  const team = req.params.team.toLowerCase();
+  if (football[team]) {
+    res.json(football[team]);
   } else {
-    res.json(zodiac["unknown"]);
+    res.json(football["unknown"]);
   }
 });
 
