@@ -4,7 +4,9 @@ document.querySelector("button").addEventListener("click", apiRequest);
 async function apiRequest() {
   try {
     const userInput = document.querySelector("input").value;
-    const res = await fetch(`/api?month=${userInput}`);
+    const res = await fetch(
+      `https://zodiacc-api.herokuapp.com/api/${userInput}`
+    );
     const data = await res.json();
 
     console.log(data);
