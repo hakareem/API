@@ -4,6 +4,7 @@ const football = {
     nickname: "The Blues",
     manager: "Thomas Tuchel",
     league: "Premier League",
+    img: "/static/chelsea.jpeg",
   },
   "bayern munich": {
     founded: 1900,

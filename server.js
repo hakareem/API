@@ -5,7 +5,9 @@ const { zodiac } = require("./zodiac");
 const { football } = require("./football");
 const PORT = process.env.PORT || 8000;
 
-app.use(cors());
+// app.use(cors());
+
+app.use("/static", express.static("./static/"));
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
