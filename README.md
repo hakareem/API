@@ -1,4 +1,4 @@
-# Zodiac Sign API
+# API
 I built this server side API so I can manipulate it to get a desired output. This Zodiac API was built using Express.js and I used client side javascript to make requests.
 
 
