@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/public/style.css" />
+    <script src="/public/main.js" defer></script>
+  </head>
+  <body>
+    <h1>Current Teams</h1>
+    <ul class="teams">
+      <% for(let i = 0; i < info.length; i++){ %>
+      <li class="team">
+        <span><% info[i].founded %></span>
+        <span><% info[i].nickname %></span>
+        <span><% info[i].manager %></span>
+        <span><% info[i].league %></span>
+        <span class="fa fa-thumbs-up"></span>
+        <span class="fa fa-trash"></span>
+      </li>
+      <% } %>
+    </ul>
+    <h2>Add A Team:</h2>
+    <form action="/addTeam" method="POST">
+      <input type="text" name="founded" />
+      <input type="text" name="nickname" />
+      <input type="text" name="manager" />
+      <input type="text" name="league" />
+      <input type="submit" />
+    </form>
+  </body>
+</html>

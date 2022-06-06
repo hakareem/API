@@ -1,16 +1,29 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const { zodiac } = require("./zodiac");
-const { football } = require("./football");
 const PORT = process.env.PORT || 8000;
+const MongoClient = require("mongodb").MongoClient;
+require("dotenv").config();
+
+let db,
+  dbConnectionStr = process.env.DB_STRING,
+  dbName = "api";
+
+MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true }).then(
+  (client) => {
+    console.log(`Connected to ${dbName} Database`);
+    db = client.db(dbName);
+  }
+);
 
 // app.use(cors());
-
-app.use("/static", express.static("./static/"));
+app.set("view engine", "ejs");
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+  db.collection("");
 });
 
 app.get("/api", (req, res) => {
