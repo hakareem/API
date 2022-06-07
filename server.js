@@ -1,12 +1,12 @@
 const express = require("express");
 const app = express();
-const cors = require("cors");
 const PORT = process.env.PORT || 8000;
 const MongoClient = require("mongodb").MongoClient;
-require("dotenv").config();
 
+//connect to db
 let db,
-  dbConnectionStr = process.env.DB_STRING,
+  dbConnectionStr =
+    "mongodb+srv://delz:seIUvTCDUUza4P9D@api.y4nn7u2.mongodb.net/?retryWrites=true&w=majority",
   dbName = "api";
 
 MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true }).then(
@@ -16,27 +16,41 @@ MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true }).then(
   }
 );
 
-// app.use(cors());
+//middleware
 app.set("view engine", "ejs");
-app.use(express.static("public"));
+app.use(express.static("public")); //static files served up
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// api
 app.get("/", (req, res) => {
-  db.collection("");
+  db.collection("teams")
+    .find()
+    .toArray()
+    .then((data) => {
+      res.render("index.ejs", { info: data });
+    })
+    .catch((err) => console.log(err));
 });
 
-app.get("/api", (req, res) => {
-  res.json(football);
+app.post("/addTeam", (req, res) => {
+  db.collection("teams")
+    .insertOne(req.body)
+    .then((result) => {
+      console.log("Team Added");
+      res.redirect("/");
+    })
+    .catch((err) => console.log(err));
 });
 
-app.get("/api/:team", (req, res) => {
-  const team = req.params.team.toLowerCase();
-  if (football[team]) {
-    res.json(football[team]);
-  } else {
-    res.json(football["unknown"]);
-  }
+app.delete("/deleteTeam", (req, res) => {
+  db.collection("teams")
+    .deleteOne({ name: req.body.name })
+    .then((result) => {
+      console.log("Team Deleted");
+      res.json("Team Deleted");
+    })
+    .catch((err) => console.log(err));
 });
 
 app.listen(PORT, () => {

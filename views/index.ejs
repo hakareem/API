@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>API</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -26,12 +26,13 @@
       </li>
       <% } %>
     </ul>
-    <h2>Add A Team:</h2>
+    <h2>Add A Football Team:</h2>
     <form action="/addTeam" method="POST">
-      <input type="text" name="founded" />
-      <input type="text" name="nickname" />
-      <input type="text" name="manager" />
-      <input type="text" name="league" />
+      <input type="text" placeholder="Name" name="name" />
+      <input type="text" placeholder="Founded" name="founded" />
+      <input type="text" placeholder="Nickname" name="nickname" />
+      <input type="text" placeholder="Manager" name="manager" />
+      <input type="text" placeholder="League" name="league" />
       <input type="submit" />
     </form>
   </body>
