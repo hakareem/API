@@ -6,7 +6,7 @@ const MongoClient = require("mongodb").MongoClient;
 //connect to db
 let db,
   dbConnectionStr =
-    "mongodb+srv://delz:seIUvTCDUUza4P9D@api.y4nn7u2.mongodb.net/?retryWrites=true&w=majority",
+    "mongodb+srv://@api.y4nn7u2.mongodb.net/?retryWrites=true&w=majority",
   dbName = "api";
 
 MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true }).then(
