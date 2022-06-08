@@ -10,15 +10,15 @@ Array.from(thumbText).forEach((el) => {
 });
 
 async function deleteTeam() {
-  const name = this.parentNode.childNodes[1].innerText;
-  const league = this.parentNode.childNodes[3].innerText;
+  const teamName = this.parentNode.childNodes[1].innerText;
+  const leagueName = this.parentNode.childNodes[3].innerText;
   try {
     const response = await fetch("deleteTeam", {
       method: "delete",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        tName: name,
-        tLeague: league,
+        teamName: teamName,
+        leagueName: leagueName,
       }),
     });
     const data = await response.json();
@@ -31,16 +31,16 @@ async function deleteTeam() {
 
 async function addLike() {
   const teamName = this.parentNode.childNodes[1].innerText;
-  const league = this.parentNode.childNodes[3].innerText;
+  const leagueName = this.parentNode.childNodes[3].innerText;
   const likes = Number(this.parentNode.childNodes[5].innerText);
   try {
     const response = await fetch("addOneLike", {
       method: "put",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        tName: teamName,
-        tLeague: league,
-        tLikes: likes,
+        teamName: teamName,
+        leagueName: leagueName,
+        likes: likes,
       }),
     });
     const data = await response.json();

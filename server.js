@@ -26,33 +26,63 @@ app.use(express.json());
 app.get("/", (req, res) => {
   db.collection("teams")
     .find()
+    .sort({ likes: -1 })
     .toArray()
     .then((data) => {
       res.render("index.ejs", { info: data });
     })
-    .catch((err) => console.log(err));
+    .catch((error) => console.error(error));
 });
 
 app.post("/addTeam", (req, res) => {
   db.collection("teams")
-    .insertOne(req.body)
+    .insertOne({
+      teamName: req.body.teamName,
+      leagueName: req.body.leagueName,
+      likes: 0,
+    })
     .then((result) => {
       console.log("Team Added");
       res.redirect("/");
     })
-    .catch((err) => console.log(err));
+    .catch((error) => console.error(error));
+});
+
+app.put("/addOneLike", (req, res) => {
+  db.collection("teams")
+    .updateOne(
+      {
+        teamName: req.body.teamName,
+        leagueName: req.body.leagueName,
+        likes: req.body.likes,
+      },
+      {
+        $set: {
+          likes: req.body.likes + 1,
+        },
+      },
+      {
+        sort: { _id: -1 },
+        upsert: true,
+      }
+    )
+    .then((result) => {
+      console.log("Added One Like");
+      res.json("Like Added");
+    })
+    .catch((error) => console.error(error));
 });
 
 app.delete("/deleteTeam", (req, res) => {
   db.collection("teams")
-    .deleteOne({ tLeague: req.body.league })
+    .deleteOne({ teamName: req.body.teamName })
     .then((result) => {
       console.log("Team Deleted");
       res.json("Team Deleted");
     })
-    .catch((err) => console.log(err));
+    .catch((error) => console.error(error));
 });
 
 app.listen(PORT, () => {
-  console.log(`Server Running on Port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
