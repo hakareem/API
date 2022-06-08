@@ -43,6 +43,7 @@ async function addLike() {
         likes: likes,
       }),
     });
+
     const data = await response.json();
     console.log(data);
     location.reload();
