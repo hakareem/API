@@ -17,7 +17,7 @@ MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true }).then(
 );
 
 //middleware
-app.set("view engine", "ejs");
+app.set("view engine", "ejs"); // template
 app.use(express.static("public")); //static files served up
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -45,7 +45,7 @@ app.post("/addTeam", (req, res) => {
 
 app.delete("/deleteTeam", (req, res) => {
   db.collection("teams")
-    .deleteOne({ name: req.body.name })
+    .deleteOne({ tLeague: req.body.league })
     .then((result) => {
       console.log("Team Deleted");
       res.json("Team Deleted");

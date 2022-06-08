@@ -1,3 +1,26 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  background-color: black;
+  color: rgb(255, 255, 255);
+}
+
 h1 {
-  color: red;
+  color: rgb(241, 253, 0);
+}
+
+.teams {
+  display: flex;
+  flex-wrap: wrap;
+}
+.team {
+  width: 210px;
+  min-height: 250px;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.972);
+  margin: 10px;
+  padding: 5px;
+  border-radius: 15px;
+  /* border: 1px solid rgb(251, 255, 6); */
+  box-shadow: 10px 10px 10px rgba(255, 247, 0, 0.885);
 }
